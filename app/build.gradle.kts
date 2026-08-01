@@ -43,12 +43,3 @@ tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
-
-// Добавляем переопределение сборщика для создания правильного JAR-архива с манифестом
-tasks.jar {
-    manifest {
-        attributes["Main-Class"] = "org.example.AppKt"
-    }
-    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
